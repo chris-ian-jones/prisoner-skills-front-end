@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import PrisonCard from './PrisonCard'
 
 const Prisons = props => {
-  const [prisonsData, getPrisonsData] = useState(null)
+  const [prisonsData, setPrisonsData] = useState(null)
   console.log('prisonsData: ', prisonsData)
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const Prisons = props => {
       .get('https://prisoner-skills-cj.herokuapp.com/api/prisons')
       .then(result => {
         console.log('axios get prisons result: ', result)
-        getPrisonsData(result.data)
+        setPrisonsData(result.data)
       })
       .catch(error => {
         console.log('axios get prisons error: ', error)

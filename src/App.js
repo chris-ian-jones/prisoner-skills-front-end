@@ -6,6 +6,7 @@ import AdminNavBar from './components/AdminNavBar'
 import SignUp from './components/SignUp'
 import Login from './components/Login'
 import Prisons from './components/Prisons'
+import Prisoners from './components/Prisoners'
 
 function App(props) {
   const [userToken, setUserToken] = useState('')
@@ -21,6 +22,7 @@ function App(props) {
       <Route exact path="/signup" component={SignUp} />
 
       <Route exact path="/" component={Prisons} />
+      <Route exact path="/prison/:id" render={props => <Prisoners {...props} />} />
     </div>
   )
 }
