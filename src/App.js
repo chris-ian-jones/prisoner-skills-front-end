@@ -1,12 +1,15 @@
 import React from 'react';
-import './App.css';
+
+import NavBar from './components/NavBar'
+import AdminNavBar from './components/AdminNavBar'
 
 function App() {
   return (
     <div className="App">
-      <p>placeholder app</p>
+      <NavBar />
+      <AdminNavBar />
     </div>
-  );
+  )
 }
 
 export default App;
