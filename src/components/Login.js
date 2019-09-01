@@ -13,6 +13,7 @@ import {
 } from 'semantic-ui-react'
 
 import history from './../utils/history'
+import axiosWithAuth from './../utils/axiosWithAuth'
 
 const FormContainer = styled.div`
   height: 95vh;
@@ -102,7 +103,14 @@ const FormikForm = withFormik({
         localStorage.setItem('token', res.data.token);
         setStatus(res.data.token)
         localStorage.setItem('username', values.username)
-        history.push('/admin/prison/')
+        
+        axiosWithAuth()
+          .get('https://prisoner-skills-cj.herokuapp.com/api/users')
+          .then(result => {
+            const adminInfo = result.data.filter(admin => admin.username === values.username)
+            history.push(`/admin/prison/${adminInfo[0].id}`)
+          })
+          .catch(error => console.log('axios get users error: ', error))
       })
       .catch(err => {
         console.log('axios login err', err)

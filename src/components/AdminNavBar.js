@@ -20,7 +20,7 @@ const NavAdmin = props => {
   }
 
   return (
-    <Menu size='big'>
+    <Menu size='large'>
       <Menu.Item position='left'>
         <Link to="/">
           <StyledLogo src={logo} alt='Prisoner Skills logo'/>

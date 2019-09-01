@@ -12,10 +12,8 @@ const PrisonerCard = props => {
         </Card.Meta>
       </Card.Content>
       <Card.Content extra>
-        <a>
           <p>Can Have Work Leave: </p>
           {props.canHaveWorkLeave ? <Icon name='check' /> : <Icon name='x' />}
-        </a>
       </Card.Content>
       <Link to={`prisoner/${props.id}`}>
         <button>Skills</button>

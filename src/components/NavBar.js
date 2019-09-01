@@ -10,7 +10,7 @@ const StyledLogo = styled.img`
 `
 
 const Nav = () => (
-  <Menu size='big'>
+  <Menu size='large'>
     <Menu.Item position='left'>
       <Link to="/">
         <StyledLogo src={logo} alt='Prisoner Skills logo'/>
