@@ -11,7 +11,6 @@ const StyledContainer = styled.div`
   align-items: center;
   margin-top: 40px;
 `
-
 const StyledCardContainer = styled.div`
   width: 100%;
   display: flex;
@@ -25,17 +24,10 @@ const Prisoners = props => {
   const [prisonersData, setPrisonersData] = useState(null)
   const prisonId = parseInt(props.match.params.id)
 
-  // console.log('prisonId', prisonId)
-
   useEffect(() => {
     Axios
       .get(`https://prisoner-skills-cj.herokuapp.com/api/prisoners`)
       .then(result => {
-        console.log('axios get prisoners result: ', result.data)
-        // result.data.map(prisoner => {
-        //   console.log(prisoner.prison_id)
-        // })
-
         const filteredPrisoners = result.data.filter(prisoner => prisoner.prison_id === prisonId)
         setPrisonersData(filteredPrisoners)
         console.log('filteredPrisoners', filteredPrisoners)
@@ -51,7 +43,13 @@ const Prisoners = props => {
       <StyledCardContainer>
         {prisonersData ?
           prisonersData.map(prisoner => (
-            <PrisonerCard key={prisoner.id} id={prisoner.id} name={prisoner.name} gender={prisoner.gender} canHaveWorkLeave={prisoner.canHaveWorkLeave} />
+            <PrisonerCard 
+              key={prisoner.id} 
+              id={prisoner.id} 
+              name={prisoner.name} 
+              gender={prisoner.gender} 
+              canHaveWorkLeave={prisoner.canHaveWorkLeave} 
+            />
           ))
           :
           null

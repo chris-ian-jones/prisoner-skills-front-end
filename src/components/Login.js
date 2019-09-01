@@ -100,10 +100,9 @@ const FormikForm = withFormik({
           setSubmitting(false);
         }, 2000);
         localStorage.setItem('token', res.data.token);
-        localStorage.setItem('username', values.username);
         setStatus(res.data.token)
         localStorage.setItem('username', values.username)
-        history.push('/admin/prison/:id')
+        history.push('/admin/prison/')
       })
       .catch(err => {
         console.log('axios login err', err)

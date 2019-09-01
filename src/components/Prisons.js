@@ -12,7 +12,6 @@ const StyledContainer = styled.div`
   align-items: center;
   margin-top: 40px;
 `
-
 const StyledCardContainer = styled.div`
   width: 100%;
   display: flex;

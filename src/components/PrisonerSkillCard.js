@@ -17,7 +17,7 @@ const StyledContainer = styled.div`
 const PrisonerSkillCard = props => {
   const [prisonerData, setPrisonerData] = useState(null)
   const prisonerId = parseInt(props.match.params.id)
-  console.log(prisonerData)
+  console.log('prisonerData', prisonerData)
   
   useEffect(() => {
     Axios
@@ -34,27 +34,35 @@ const PrisonerSkillCard = props => {
   return (
     <StyledContainer>
       {prisonerData ?
-      <Card>
-        {prisonerData.gender === "Male" ? <Image src={male} wrapped ui={false} /> : <Image src={female} wrapped ui={false} />}
-        <Card.Content>
-          <Card.Header>{prisonerData.name}</Card.Header>
-          <Card.Meta>
-            <span>{prisonerData.gender}</span>
-          </Card.Meta>
-        </Card.Content>
-        <Card.Content extra>
-          <a>
-            <p>Can Have Work Leave: </p>
-            {prisonerData.canHaveWorkLeave ? <Icon name='check' /> : <Icon name='x' />}
-          </a>
-        </Card.Content>
-        <Card.Content>
-          <p>Skills:</p>
-            {prisonerData.skills.map(skill => <p>{skill.name}</p>)}
-        </Card.Content>
-      </Card>
-      :
-      ''
+        <Card>
+          {prisonerData.gender === "Male" ? 
+            <Image src={male} wrapped ui={false} /> 
+            : 
+            <Image src={female} wrapped ui={false} />
+          }
+          <Card.Content>
+            <Card.Header>{prisonerData.name}</Card.Header>
+            <Card.Meta>
+              <span>{prisonerData.gender}</span>
+            </Card.Meta>
+          </Card.Content>
+          <Card.Content extra>
+            <a>
+              <p>Can Have Work Leave: </p>
+              {prisonerData.canHaveWorkLeave ? 
+                <Icon name='check' /> 
+                : 
+                <Icon name='x' />
+              }
+            </a>
+          </Card.Content>
+          <Card.Content>
+            <p>Skills:</p>
+              {prisonerData.skills.map(skill => <p>{skill.name}</p>)}
+          </Card.Content>
+        </Card>
+        :
+        ''
       }
     </StyledContainer>
   )

@@ -12,6 +12,7 @@ const StyledLogo = styled.img`
 `
 
 const NavAdmin = props => {
+
   const signOutHandler = event => {
     localStorage.clear();
     props.setUserToken('')
@@ -29,19 +30,17 @@ const NavAdmin = props => {
         <NavLink 
           to="/admin/prisoner/new" 
           activeClassName="selected" 
-          activeStyle={{
-            color: "#05A6D2",
-          }}>
+          activeStyle={{ color: "#05A6D2" }}
+        >
           Add Prisoner
         </NavLink>
       </Menu.Item>
       <Menu.Item>
         <NavLink 
-          to="/admin/prison/:id" 
+          to="/admin/prison" 
           activeClassName="selected" 
-          activeStyle={{
-            color: "#05A6D2",
-          }}>
+          activeStyle={{ color: "#05A6D2" }}
+        >
           Dashboard
         </NavLink>
       </Menu.Item>
