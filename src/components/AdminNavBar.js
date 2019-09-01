@@ -12,6 +12,7 @@ const StyledLogo = styled.img`
 `
 
 const NavAdmin = props => {
+  const adminId = localStorage.getItem('adminId')
 
   const signOutHandler = event => {
     localStorage.clear();
@@ -37,7 +38,7 @@ const NavAdmin = props => {
       </Menu.Item>
       <Menu.Item>
         <NavLink 
-          to="/admin/prison" 
+          to={`/admin/prison/${adminId}`}
           activeClassName="selected" 
           activeStyle={{ color: "#05A6D2" }}
         >

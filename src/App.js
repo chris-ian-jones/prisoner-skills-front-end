@@ -9,6 +9,7 @@ import Prisons from './components/Prisons'
 import Prisoners from './components/Prisoners'
 import PrisonerSkillCard from './components/PrisonerSkillCard'
 import AdminDashboard from './components/AdminDashboard'
+import AddPrisoner from './components/AddPrisoner'
 
 function App(props) {
   const [userToken, setUserToken] = useState('')
@@ -28,6 +29,7 @@ function App(props) {
       <Route exact path="/prison/prisoner/:id" render={props => <PrisonerSkillCard {...props} />} />
 
       <Route exact path="/admin/prison/:id" component={AdminDashboard} />
+      <Route exact path="/admin/prisoner/new" component={AddPrisoner} />
     </div>
   )
 }

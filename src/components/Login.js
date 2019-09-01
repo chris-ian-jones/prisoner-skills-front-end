@@ -108,6 +108,7 @@ const FormikForm = withFormik({
           .get('https://prisoner-skills-cj.herokuapp.com/api/users')
           .then(result => {
             const adminInfo = result.data.filter(admin => admin.username === values.username)
+            localStorage.setItem('adminId', adminInfo[0].id)
             history.push(`/admin/prison/${adminInfo[0].id}`)
           })
           .catch(error => console.log('axios get users error: ', error))

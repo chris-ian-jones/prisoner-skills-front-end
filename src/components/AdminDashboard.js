@@ -25,7 +25,7 @@ const AdminDashboard = props => {
   return (
     <>
       <p>admindashboard placeholder</p>
-      {adminsPrisonData ? adminsPrisonData.length === 0 ? <AddPrison /> : <Prisoners { ...props } /> : ''}
+      {adminsPrisonData ? adminsPrisonData.length === 0 ? <AddPrison {...props} /> : <Prisoners {...props} /> : ''}
     </>
   )
 }
