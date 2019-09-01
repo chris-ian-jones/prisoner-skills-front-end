@@ -5,6 +5,7 @@ import NavBar from './components/NavBar'
 import AdminNavBar from './components/AdminNavBar'
 import SignUp from './components/SignUp'
 import Login from './components/Login'
+import Prisons from './components/Prisons'
 
 function App(props) {
   const [userToken, setUserToken] = useState('')
@@ -18,6 +19,8 @@ function App(props) {
       { userToken ? <AdminNavBar setUserToken={setUserToken}/> : <NavBar /> }
       <Route exact path="/login" render={props => <Login {...props} setUserToken={setUserToken} />} />
       <Route exact path="/signup" component={SignUp} />
+
+      <Route exact path="/" component={Prisons} />
     </div>
   )
 }
