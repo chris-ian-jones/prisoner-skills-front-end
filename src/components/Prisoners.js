@@ -31,7 +31,7 @@ const Prisoners = props => {
     <>
     {prisonersData ?
       prisonersData.map(prisoner => (
-        <PrisonerCard key={prisoner.id} name={prisoner.name} gender={prisoner.gender} canHaveWorkLeave={prisoner.canHaveWorkLeave} />
+        <PrisonerCard key={prisoner.id} id={prisoner.id} name={prisoner.name} gender={prisoner.gender} canHaveWorkLeave={prisoner.canHaveWorkLeave} />
       ))
       :
       null
