@@ -29,6 +29,7 @@ function App(props) {
       <Route exact path="/prison/prisoner/:id" render={props => <PrisonerSkillCard {...props} />} />
 
       <Route exact path="/admin/prison/:id" component={AdminDashboard} />
+      <Route exact path="/admin/prison/prisoner/:id" component={PrisonerSkillCard} />
       <Route exact path="/admin/prisoner/new" component={AddPrisoner} />
     </div>
   )

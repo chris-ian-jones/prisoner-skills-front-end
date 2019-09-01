@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import axiosWithAuth from './../utils/axiosWithAuth'
 
 const AddPrison = props => {
-  const [prisonInfo, newPrisonInfo] = useState(
+  const [prisonInfo, setPrisonInfo] = useState(
     {
       name: '',
       address: ''
@@ -13,7 +13,7 @@ const AddPrison = props => {
   // console.log(prisonInfo)
 
   const onChangeHandler = event => {
-    newPrisonInfo({
+    setPrisonInfo({
       ...prisonInfo,
       [event.target.name]: event.target.value
     })
@@ -29,7 +29,10 @@ const AddPrison = props => {
     console.log(newPrison)
     axiosWithAuth()
       .post("https://prisoner-skills-cj.herokuapp.com/api/auth/prisons", newPrison)
-      .then(result => console.log('axios post new prison result', result))
+      .then(result => {
+        console.log('axios post new prison result', result)
+        props.setPrisonName(result.data.name)
+      })
       .catch(error => console.log('axios post new prison error', error))
   }
 

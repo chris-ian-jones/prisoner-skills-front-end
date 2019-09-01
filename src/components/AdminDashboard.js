@@ -7,8 +7,11 @@ import Prisoners from './Prisoners'
 const AdminDashboard = props => {
   const [adminsPrisonData, setAdminsPrisonData] = useState(null)
   const adminId = props.match.params.id
+  const [prisonName, setPrisonName] = useState('')
+
   console.log('adminId: ', adminId)
   console.log('adminsPrisonData', adminsPrisonData)
+  console.log('prisonName', prisonName)
 
   useEffect(() => {
     axiosWithAuth()
@@ -20,12 +23,12 @@ const AdminDashboard = props => {
       .catch(error => {
         console.log('axios get prisons error: ', error)
       })
-  }, [adminId])
+  }, [adminId, prisonName])
 
   return (
     <>
-      <p>admindashboard placeholder</p>
-      {adminsPrisonData ? adminsPrisonData.length === 0 ? <AddPrison {...props} /> : <Prisoners {...props} /> : ''}
+      <p>{prisonName}</p>
+      {adminsPrisonData ? adminsPrisonData.length === 0 ? <AddPrison {...props} setPrisonName={setPrisonName} /> : <Prisoners {...props} /> : ''}
     </>
   )
 }
