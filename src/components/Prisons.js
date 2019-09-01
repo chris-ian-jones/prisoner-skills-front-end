@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
 
+import PrisonerCard from './PrisonerCard'
+
 const Prisons = props => {
   const [prisonsData, getPrisonsData] = useState(null)
   console.log('prisonsData: ', prisonsData)
@@ -18,7 +20,10 @@ const Prisons = props => {
   }, [])
 
   return (
-    <p>prisons placeholder</p>
+    <>
+      <h1>Prison List</h1>
+      {prisonsData ? prisonsData.map(prison => <PrisonerCard key={prison.id} name={prison.name} address={prison.address} />) : ''}
+    </>
   )
 }
 
