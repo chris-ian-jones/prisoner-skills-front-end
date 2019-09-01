@@ -1,10 +1,13 @@
 import React from 'react'
+import { Card, Icon } from 'semantic-ui-react'
 
 const PrisonCard = props => {
   return (
     <>
-      <p>Name: {props.name}</p>
-      <p>Address: {props.address}</p>
+      <Card>
+        <Card.Content header={props.name} />
+        <Card.Content description={props.address} />
+      </Card>
     </>
   )
 }
