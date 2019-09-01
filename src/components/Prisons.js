@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { Link } from "react-router-dom"
 
-import PrisonerCard from './PrisonerCard'
+import PrisonCard from './PrisonCard'
 
 const Prisons = props => {
   const [prisonsData, getPrisonsData] = useState(null)
@@ -26,7 +26,7 @@ const Prisons = props => {
       {prisonsData ? 
         prisonsData.map(prison => (
           <Link to={`prison/${prison.id}`} key={prison.id}>
-            <PrisonerCard key={prison.id} name={prison.name} address={prison.address} />
+            <PrisonCard key={prison.id} name={prison.name} address={prison.address} />
           </Link>
         )) 
       : 

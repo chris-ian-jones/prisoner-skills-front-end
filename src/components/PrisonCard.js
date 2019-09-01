@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PrisonerCard = props => {
+const PrisonCard = props => {
   return (
     <>
       <p>Name: {props.name}</p>
@@ -9,4 +9,4 @@ const PrisonerCard = props => {
   )
 }
 
-export default PrisonerCard
+export default PrisonCard
