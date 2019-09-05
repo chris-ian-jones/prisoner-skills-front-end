@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { Link } from "react-router-dom"
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+import Loader from 'react-loader-spinner';
 
 import PrisonCard from './PrisonCard'
+import { getPrisonData } from './../actions'
 
 const StyledContainer = styled.div`
   width: 100vw;
@@ -22,27 +25,21 @@ const StyledCardContainer = styled.div`
 `
 
 const Prisons = props => {
-  const [prisonsData, setPrisonsData] = useState(null)
-  console.log('prisonsData: ', prisonsData)
+  console.log('prisonsData: ', props.prisonsData)
 
   useEffect(() => {
-    Axios
-      .get('https://prisoner-skills-cj.herokuapp.com/api/prisons')
-      .then(result => {
-        console.log('axios get prisons result: ', result)
-        setPrisonsData(result.data)
-      })
-      .catch(error => {
-        console.log('axios get prisons error: ', error)
-      })
+    props.getPrisonData()
   }, [])
 
   return (
     <StyledContainer>
       <h1>Prison List</h1>
-      <StyledCardContainer>
-        {prisonsData ? 
-          prisonsData.map(prison => (
+      {props.isLoading ? (
+        <Loader type="ThreeDots" color="#528dc9" height={40} width={100}/>
+      ) : (
+        <StyledCardContainer>
+        {props.prisonsData ? 
+          props.prisonsData.map(prison => (
             <Link to={`prison/${prison.id}`} key={prison.id}>
               <PrisonCard key={prison.id} name={prison.name} address={prison.address} />
             </Link>
@@ -50,9 +47,21 @@ const Prisons = props => {
         : 
         null
         }
-      </StyledCardContainer>
+        </StyledCardContainer>
+      )}
     </StyledContainer>
   )
 }
 
-export default Prisons
+const mapStateToProps = state => {
+  return {
+    prisonsData: state.prisons,
+    isLoading: state.isLoading,
+    error: state.error
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {getPrisonData}
+)(Prisons)
