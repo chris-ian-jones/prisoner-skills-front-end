@@ -5,6 +5,8 @@ import styled from 'styled-components'
 
 import male from './../img/male.jpg'
 import female from './../img/female.jpg'
+import axiosWithAuth from './../utils/axiosWithAuth'
+import history from './../utils/history'
 
 const StyledContainer = styled.div`
   height: 75vh;
@@ -17,6 +19,7 @@ const StyledContainer = styled.div`
 const PrisonerSkillCard = props => {
   const [prisonerData, setPrisonerData] = useState(null)
   const prisonerId = parseInt(props.match.params.id)
+  const prisonId = localStorage.getItem("adminId")
   console.log('prisonerData', prisonerData)
   
   useEffect(() => {
@@ -30,6 +33,17 @@ const PrisonerSkillCard = props => {
         console.log('axios get skills error: ', error)
       })
   }, [])
+  const deleteButtonHandler = event => {
+    axiosWithAuth()
+      .delete(`https://prisoner-skills-cj.herokuapp.com/api/auth/prisoners/${prisonerId}`)
+      .then(result => {
+        console.log('axios delete prisoner result: ', result)
+        history.push(`/admin/prison/${prisonId}`)
+      })
+      .catch(error => {
+        console.log('axios delete prisoner error: ', error)
+      })
+  }
 
   return (
     <StyledContainer>
@@ -60,6 +74,8 @@ const PrisonerSkillCard = props => {
             <p>Skills:</p>
               {prisonerData.skills.map(skill => <p>{skill.name}</p>)}
           </Card.Content>
+          {prisonId ? <button>Edit</button> : ''}
+          {prisonId ? <button onClick={deleteButtonHandler}>Delete</button> : ''}
         </Card>
         :
         ''
