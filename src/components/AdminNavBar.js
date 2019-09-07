@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Menu, Button } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import { NavLink, Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import axiosWithAuth from './../utils/axiosWithAuth.js'
 import history from './../utils/history'
 import logo from './../img/logo.png'
 
@@ -12,7 +13,22 @@ const StyledLogo = styled.img`
 `
 
 const NavAdmin = props => {
+  const [adminsPrisonData, setAdminsPrisonData] = useState(null)
   const adminId = localStorage.getItem('adminId')
+
+  console.log('adminsPrisonData: ', adminsPrisonData)
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get('https://prisoner-skills-cj.herokuapp.com/api/prisons')
+      .then(result => {
+        console.log('axios get prisons result: ', result.data)
+        setAdminsPrisonData(result.data.filter(prison => prison.user_id === parseInt(adminId)))
+      })
+      .catch(error => {
+        console.log('axios get prisons error: ', error)
+      })
+  }, [adminId])
 
   const signOutHandler = event => {
     localStorage.clear();
