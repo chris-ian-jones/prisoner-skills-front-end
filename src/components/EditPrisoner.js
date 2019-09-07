@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { Card, Icon, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
-import { Link } from "react-router-dom"
 
 import male from './../img/male.jpg'
 import female from './../img/female.jpg'
-import axiosWithAuth from './../utils/axiosWithAuth'
-import history from './../utils/history'
+import axiosWithAuth from '../utils/axiosWithAuth'
+import history from '../utils/history'
 
 const StyledContainer = styled.div`
   height: 75vh;
@@ -17,12 +16,11 @@ const StyledContainer = styled.div`
   align-items: center;
 `
 
-const PrisonerSkillCard = props => {
+const EditPrisoner = props => {
   const [prisonerData, setPrisonerData] = useState(null)
   const prisonerId = parseInt(props.match.params.id)
   const prisonId = localStorage.getItem("adminId")
-  console.log('prisonerData', prisonerData)
-  
+
   useEffect(() => {
     Axios
       .get(`https://prisoner-skills-cj.herokuapp.com/api/prisoners/${prisonerId}/skills`)
@@ -34,17 +32,6 @@ const PrisonerSkillCard = props => {
         console.log('axios get skills error: ', error)
       })
   }, [])
-  const deleteButtonHandler = event => {
-    axiosWithAuth()
-      .delete(`https://prisoner-skills-cj.herokuapp.com/api/auth/prisoners/${prisonerId}`)
-      .then(result => {
-        console.log('axios delete prisoner result: ', result)
-        history.push(`/admin/prison/${prisonId}`)
-      })
-      .catch(error => {
-        console.log('axios delete prisoner error: ', error)
-      })
-  }
 
   return (
     <StyledContainer>
@@ -75,21 +62,13 @@ const PrisonerSkillCard = props => {
             <p>Skills:</p>
               {prisonerData.skills.map(skill => <p>{skill.name}</p>)}
           </Card.Content>
-          {prisonId ?
-            <Link to={`/admin/prison/prisoner/${prisonerId}/edit`}> 
-              <button>
-                Edit
-              </button> 
-            </Link>
-          : ''
-          }
-          {prisonId ? <button onClick={deleteButtonHandler}>Delete</button> : ''}
+          <button>Update</button>
         </Card>
-        :
-        ''
-      }
+      :
+      ''
+    }
     </StyledContainer>
   )
 }
 
-export default PrisonerSkillCard
+export default EditPrisoner
