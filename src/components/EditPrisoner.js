@@ -15,11 +15,18 @@ const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
+const SkillContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 
 const EditPrisoner = props => {
   const [prisonerData, setPrisonerData] = useState(null)
   const prisonerId = parseInt(props.match.params.id)
   const prisonId = localStorage.getItem("adminId")
+  {prisonerData ? console.log('prisoner skills: ', prisonerData.skills) : console.log('prisoner skills: ', '')}
+
+  console.log('prisonerdata: ', prisonerData)
 
   useEffect(() => {
     Axios
@@ -32,6 +39,22 @@ const EditPrisoner = props => {
         console.log('axios get skills error: ', error)
       })
   }, [])
+
+  const skillDeleteHandler = event => {
+    const skillId = event.target.id
+    axiosWithAuth()
+      .delete(`https://prisoner-skills-cj.herokuapp.com/api/auth/skills/${skillId}`)
+      .then(result => {
+        console.log('axios delete skills result: ', result)
+        setPrisonerData({
+          ...prisonerData,
+          skills: prisonerData.skills.filter(skill => skill.id != skillId)
+        })
+      })
+      .catch(error => {
+        console.log('axios delete skills error: ',error)
+      })
+  }
 
   return (
     <StyledContainer>
@@ -60,7 +83,13 @@ const EditPrisoner = props => {
           </Card.Content>
           <Card.Content>
             <p>Skills:</p>
-              {prisonerData.skills.map(skill => <p>{skill.name}</p>)}
+              {prisonerData.skills.map(skill =>
+                <SkillContainer>
+                  <p>{skill.name}</p>
+                  <div onClick={skillDeleteHandler} id={skill.id}>X</div>
+                </SkillContainer>
+              )}
+              
           </Card.Content>
           <button>Update</button>
         </Card>
